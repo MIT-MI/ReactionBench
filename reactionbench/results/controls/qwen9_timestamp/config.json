@@ -1,0 +1,20 @@
+{
+  "model": "tinker:Qwen/Qwen3.5-9B",
+  "task": "ranking_timestamp",
+  "condition": "normal",
+  "selected": [
+    "51413",
+    "51481",
+    "51520",
+    "51612",
+    "61995"
+  ],
+  "source_sha256": "084ec8e69489ebe2fe077582d9e75f5cb4b328e188e00f32198c6364ce496861",
+  "code_sha256": {
+    "run_revision.py": "974de205a85d9f2f4bed2fcfab1d5bce404f327c6a19ee0d3659013404340ce6",
+    "revision_controls.py": "15c564927f8d06a09116c57ff9bda95075b0e9d59f7854c40e15828b6383487a",
+    "run_ranking.py": "e3b29ef8c516745809d4da01b8aaa31c49cdce6183a72e63628dc42caa8c2334",
+    "frames.py": "d9630a0712b40d2c1da0340f02ad124c3a912ab1435a9fee596f239690f23ab3"
+  },
+  "donors_sha256": null
+}
