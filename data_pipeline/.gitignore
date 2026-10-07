@@ -1,0 +1,15 @@
+# secrets and per-deployment config
+.env
+06_annotate/web/*/manifest.json
+cookies.txt
+*.cookies
+
+# generated data (never commit media, participant ids, or rater-level exports)
+work/
+data/
+06_annotate/web/stimulus_review/data.js
+06_annotate/web/match_review/match_train.json
+06_annotate/web/match_review/match_xv.json
+*.mp4
+*.wav
+__pycache__/

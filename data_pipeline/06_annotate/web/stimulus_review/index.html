@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stimulus↔Reaction review</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Stimulus ↔ reaction alignment review</h1>
+      <p id="sub">Does the stimulus (left) actually explain the reaction (right)?</p>
+    </div>
+    <div class="tally">
+      <span id="counts">0 good · 0 bad · 0 left</span>
+      <button id="export">Copy verdicts</button>
+    </div>
+  </header>
+  <main id="list"></main>
+  <textarea id="dump" readonly hidden></textarea>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

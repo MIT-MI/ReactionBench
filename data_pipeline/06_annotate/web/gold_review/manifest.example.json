@@ -1,0 +1,6 @@
+{
+  "supabaseUrl": "https://<your-project>.supabase.co",
+  "supabaseAnonKey": "<supabase-publishable-anon-key>",
+  "r2PublicBaseUrl": "https://<your-public-r2-bucket-domain>/",
+  "target": 200
+}

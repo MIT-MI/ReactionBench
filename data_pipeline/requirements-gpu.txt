@@ -1,0 +1,12 @@
+# GPU stages: 02_align (per-domain stimulus/reactor separation) and 04_features (LibreFace).
+-r requirements.txt
+-r 02_align/talking_head/requirements.txt   # insightface, onnxruntime-gpu, opencv
+
+torch>=2.4
+torchvision>=0.19
+opencv-python>=4.8
+albumentations>=1.4      # pipeline_game*.py face-crop dependency check
+libreface>=0.1           # 04_features; the original runs used a pinned conda env (see docker/libreface)
+
+# AudioSep (some 02_align pipelines) is not on PyPI: clone https://github.com/Audio-AGI/AudioSep,
+# download its checkpoint, and set AUDIOSEP_ROOT / AUDIOSEP_CHECKPOINT_DIR in .env.

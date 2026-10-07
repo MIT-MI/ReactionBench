@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ReactionBench — Reaction Annotation</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <h1>Reaction Annotation</h1>
+      <p id="subtitle">loading…</p>
+    </div>
+  </header>
+
+  <section id="gate" class="gate">
+    <div class="gate-card">
+      <h2>Enter your worker ID to begin</h2>
+      <p class="hint">Prolific workers: this is filled in automatically. Otherwise type any stable id.</p>
+      <form id="gateForm">
+        <input id="workerId" type="text" autocomplete="off" placeholder="e.g. lab_alice" />
+        <button type="submit" class="primary">Start</button>
+      </form>
+    </div>
+  </section>
+
+  <main id="main" class="hidden">
+    <!-- ---------------------------------------------------------------- Stage A -->
+    <section id="paneA" class="pane">
+      <div class="stage">
+        <div class="progress"><div class="bar" id="barA"></div></div>
+        <p class="progress-text" id="progA"></p>
+
+        <video id="videoA" preload="auto" playsinline controls></video>
+        <div class="timeline" id="timeline"></div>
+        <p class="meta" id="metaA"></p>
+
+        <div class="controls">
+          <button type="button" id="btnReplay">Replay this moment <kbd>R</kbd></button>
+          <button type="button" id="btnFromStart">Play from clip start <kbd>F</kbd></button>
+          <button type="button" id="btnFree">Keep playing <kbd>G</kbd></button>
+          <button type="button" id="btnNextClip">Next clip <kbd>N</kbd></button>
+        </div>
+
+        <div class="scorebar">
+          <button type="button" class="score" data-score="0"><b>0</b><span>calm</span><kbd>0</kbd></button>
+          <button type="button" class="score" data-score="1"><b>1</b><span>mild</span><kbd>1</kbd></button>
+          <button type="button" class="score" data-score="2"><b>2</b><span>clear</span><kbd>2</kbd></button>
+          <button type="button" class="score" data-score="3"><b>3</b><span>peak</span><kbd>3</kbd></button>
+        </div>
+        <div class="cuebar">
+          <span class="cuelabel">Cue (optional):</span>
+          <button type="button" class="cue" data-cue="visual">visual <kbd>V</kbd></button>
+          <button type="button" class="cue" data-cue="audio">audio <kbd>A</kbd></button>
+          <button type="button" class="cue" data-cue="both">both <kbd>B</kbd></button>
+        </div>
+        <p class="saved" id="savedA"></p>
+      </div>
+
+      <aside class="panel">
+        <h2>What to do</h2>
+        <ol class="steps">
+          <li>The clip plays from the start once, so you see how this reviewer normally behaves.</li>
+          <li>The bar under the video marks the <strong>moments to score</strong> (blue = current).
+              You only score these marked moments — the grey gaps between them are not scored.</li>
+          <li>For each marked moment, press <strong>0–3</strong>. Scoring one jumps to the next.
+              Click any marker to re-watch that exact moment.</li>
+        </ol>
+        <h2>The 0–3 scale</h2>
+        <dl class="anchors">
+          <dt>0</dt><dd>calm: no visible or audible reaction.</dd>
+          <dt>1</dt><dd>mild: slight smile, nod, small head movement.</dd>
+          <dt>2</dt><dd>clear: audible laugh, exclamation, raised brows with a forward lean.</dd>
+          <dt>3</dt><dd>peak: scream, jump, hands to face, recoiling backwards.</dd>
+        </dl>
+        <p class="hint">
+          Score <strong>every</strong> marked moment, including ones you rate 0 or 1 — a low
+          score is a real answer, not a skip.
+        </p>
+        <p class="hint">
+          The <strong>cue</strong> buttons are optional: if you score ≥ 2, tag whether you
+          judged it from what you <em>saw</em>, what you <em>heard</em>, or both.
+        </p>
+        <p class="hint"><kbd>Space</kbd> pause · <kbd>N</kbd>/<kbd>→</kbd> next clip · <kbd>←</kbd> previous clip.</p>
+      </aside>
+    </section>
+
+    <!-- ---------------------------------------------------------------- Stage B (optional ranking stage) -->
+    <section id="paneB" class="pane hidden">
+      <div class="stage">
+        <div class="progress"><div class="bar" id="barB"></div></div>
+        <p class="progress-text" id="progB"></p>
+
+        <video id="videoB" preload="auto" playsinline controls></video>
+        <p class="meta" id="metaB"></p>
+
+        <ol class="ranklist" id="rankList"></ol>
+
+        <div class="controls">
+          <button type="button" id="btnNoStrongest">No clear strongest</button>
+          <button type="button" id="btnRankSave" class="primary">Save &amp; next <kbd>Enter</kbd></button>
+        </div>
+        <p class="saved" id="savedB"></p>
+      </div>
+
+      <aside class="panel">
+        <h2>What to do</h2>
+        <ol class="steps">
+          <li>Preview each moment with its ▶ button.</li>
+          <li>Click the moments <strong>strongest reaction first</strong>; the numbers build the ranking.
+              Click one again to unset it.</li>
+          <li>Rank every moment, then <strong>Save</strong>. If there is no clear strongest, use that button instead of guessing.</li>
+        </ol>
+        <p class="hint">Only clips that already passed the scoring stage appear here.</p>
+      </aside>
+    </section>
+  </main>
+
+  <!-- completion overlay: shown after the session target is reached or the pool is exhausted -->
+  <div id="doneOverlay" class="overlay hidden">
+    <div class="overlay-card">
+      <h2 id="doneTitle">Session complete — thank you!</h2>
+      <p id="doneMsg" class="hint"></p>
+      <a id="doneLink" class="primary bigbtn hidden" href="#">Return to Prolific to submit ▸</a>
+      <p id="doneCode" class="code hidden"></p>
+      <button type="button" id="doneMore" class="ghost">Keep going anyway</button>
+    </div>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>

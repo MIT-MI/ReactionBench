@@ -1,0 +1,35 @@
+* { box-sizing: border-box; }
+body { margin: 0; font: 15px/1.5 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  background: #0e1116; color: #e6e6e6; }
+header { position: sticky; top: 0; z-index: 5; display: flex; justify-content: space-between;
+  align-items: center; gap: 16px; padding: 12px 20px; background: #161b22; border-bottom: 1px solid #2a2f38; }
+h1 { font-size: 17px; margin: 0; }
+#sub { margin: 2px 0 0; color: #9aa4b2; font-size: 13px; }
+.tally { display: flex; align-items: center; gap: 12px; white-space: nowrap; }
+#counts { color: #9aa4b2; font-variant-numeric: tabular-nums; }
+button { font: inherit; padding: 7px 12px; border-radius: 8px; border: 1px solid #2a2f38;
+  background: #21262d; color: #e6e6e6; cursor: pointer; }
+button:hover { background: #2d333b; }
+main { max-width: 1100px; margin: 0 auto; padding: 20px; display: flex; flex-direction: column; gap: 18px; }
+.card { border: 1px solid #2a2f38; border-radius: 12px; overflow: hidden; background: #161b22;
+  transition: border-color .15s, opacity .15s; }
+.card.good { border-color: #2ea043; }
+.card.bad { border-color: #d1242f; opacity: .55; }
+.videos { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: #2a2f38; }
+.pane { background: #0e1116; padding: 10px; }
+.pane h3 { margin: 0 0 6px; font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: #9aa4b2; }
+video { width: 100%; border-radius: 8px; background: #000; display: block; }
+.meta { padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; }
+.event { font-size: 15px; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; font-size: 12px; color: #9aa4b2; }
+.tag { background: #21262d; border: 1px solid #2a2f38; border-radius: 999px; padding: 2px 9px; }
+.tag.warn { background: #3d1e12; border-color: #d1642f; color: #f0a875; }
+.tag.recut { background: #12303d; border-color: #2f9fd1; color: #75c8f0; }
+.btn-play { background: #1f6feb; border-color: #1f6feb; color: #fff; }
+.btn-play:hover { background: #388bfd; }
+.btn-stimaudio.on { background: #6e40c9; border-color: #8957e5; color: #fff; }
+.actions { display: flex; gap: 10px; align-items: center; }
+.btn-good.on { background: #1a7f37; border-color: #2ea043; color: #fff; }
+.btn-bad.on { background: #a4232c; border-color: #d1242f; color: #fff; }
+.idx { color: #6b7280; font-size: 12px; margin-left: auto; }
+@media (max-width: 720px) { .videos { grid-template-columns: 1fr; } }

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ReactionBench Phase 0 Blind Review</title>
+  <link rel="stylesheet" href="./review.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <h1>Phase 0 Blind Review</h1>
+      <p id="subtitle">loading…</p>
+    </div>
+    <nav class="tabs" aria-label="Review mode">
+      <button type="button" id="tabScore" class="active">1 · Score candidates</button>
+      <button type="button" id="tabSweep">2 · Sweep for misses</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ---------------------------------------------------------------- Score -->
+    <section id="scorePane" class="pane">
+      <div class="stage">
+        <div class="progress"><div class="bar" id="scoreBar"></div></div>
+        <p class="progress-text" id="scoreProgress"></p>
+
+        <video id="scoreVideo" preload="auto" playsinline controls></video>
+
+        <div class="timeline" id="timeline"></div>
+        <p class="meta" id="scoreMeta"></p>
+
+        <div class="controls">
+          <button type="button" id="btnReplay">Replay candidate <kbd>R</kbd></button>
+          <button type="button" id="btnFromStart">Play from clip start <kbd>F</kbd></button>
+          <button type="button" id="btnFree">Keep playing past it <kbd>G</kbd></button>
+          <button type="button" id="btnPrev">← Prev <kbd>←</kbd></button>
+          <button type="button" id="btnNext">Next → <kbd>→</kbd></button>
+        </div>
+
+        <div class="scorebar">
+          <button type="button" class="score" data-score="0"><b>0</b><span>calm</span><kbd>0</kbd></button>
+          <button type="button" class="score" data-score="1"><b>1</b><span>mild</span><kbd>1</kbd></button>
+          <button type="button" class="score" data-score="2"><b>2</b><span>clear</span><kbd>2</kbd></button>
+          <button type="button" class="score" data-score="3"><b>3</b><span>peak</span><kbd>3</kbd></button>
+        </div>
+
+        <div class="cuebar">
+          <span class="cuelabel">Cue carried by:</span>
+          <button type="button" class="cue" data-cue="visual">visual <kbd>V</kbd></button>
+          <button type="button" class="cue" data-cue="audio">audio <kbd>A</kbd></button>
+          <button type="button" class="cue" data-cue="both">both <kbd>B</kbd></button>
+        </div>
+
+        <input type="text" id="scoreNote" placeholder="optional note (saved with the score)" />
+        <p class="saved" id="scoreSaved"></p>
+      </div>
+
+      <aside class="panel">
+        <h2>Anchored scale</h2>
+        <dl class="anchors">
+          <dt>0</dt><dd>calm viewing: no visible or audible reaction.</dd>
+          <dt>1</dt><dd>mild: slight smile, nod, small head movement.</dd>
+          <dt>2</dt><dd>clear: audible laugh, exclamation, raised brows with a forward lean.</dd>
+          <dt>3</dt><dd>peak: scream, jump, hands to face, recoiling backwards.</dd>
+        </dl>
+        <p class="hint">
+          Word-for-word the scale the models were given, so their scores and yours are
+          answers to the same question.
+        </p>
+        <h2>Score every candidate</h2>
+        <p class="hint">
+          Including the 0s and 1s. A clip holding both a 3 and a 1 is a same-video hard
+          negative, and that pair only exists if you record the low score.
+        </p>
+        <h2>Context</h2>
+        <p class="hint">
+          Candidates are grouped by clip and a new clip plays from the top, so you see this
+          person's baseline before being asked whether anything is strong. Some creators are
+          animated throughout; a 2 for one of them is not a 2 for a deadpan reviewer.
+        </p>
+        <p class="hint">
+          The strip under the video marks every candidate in this clip — current one
+          highlighted, already-scored ones dimmed. Click any of them to jump.
+          <kbd>Space</kbd> pauses, <kbd>G</kbd> lets playback run past the candidate.
+        </p>
+        <p class="hint">
+          Grouping by clip costs nothing in blinding: what stays hidden is which method
+          proposed a candidate, and that is never shown.
+        </p>
+        <h2>Which channel carried it</h2>
+        <p class="hint">
+          Optional but valuable: tagging visual / audio / both bounds what a vision-only
+          model could ever reach here. Several benchmark models cannot hear at all.
+        </p>
+      </aside>
+    </section>
+
+    <!-- ---------------------------------------------------------------- Sweep -->
+    <section id="sweepPane" class="pane hidden">
+      <div class="stage">
+        <div class="progress"><div class="bar" id="sweepBar"></div></div>
+        <p class="progress-text" id="sweepProgress"></p>
+
+        <video id="sweepVideo" preload="auto" playsinline controls></video>
+
+        <p class="meta" id="sweepMeta"></p>
+
+        <div class="controls">
+          <button type="button" id="btnSpeed">Speed: 2×</button>
+          <button type="button" id="btnMark1">Mark ≥1 here <kbd>1</kbd></button>
+          <button type="button" id="btnMark2">Mark ≥2 here <kbd>2</kbd></button>
+          <button type="button" id="btnMark3">Mark 3 here <kbd>3</kbd></button>
+          <button type="button" id="btnExtend">Extend last mark to here <kbd>E</kbd></button>
+        </div>
+
+        <ul class="marks" id="sweepMarks"></ul>
+
+        <div class="controls">
+          <button type="button" id="btnSweepSave" class="primary">Save &amp; next clip <kbd>Enter</kbd></button>
+          <button type="button" id="btnSkipNotRealtime">Not a real-time reaction — skip <kbd>N</kbd></button>
+          <button type="button" id="btnSweepPrev">← Previous clip</button>
+        </div>
+        <p class="saved" id="sweepSaved"></p>
+      </div>
+
+      <aside class="panel">
+        <h2>Sweep for misses</h2>
+        <p class="hint">
+          Watch each clip end to end and mark every moment reaching 1 or above that the
+          candidates missed. This is the denominator: without it only precision is
+          computable, not recall.
+        </p>
+        <p class="hint">
+          Mark <strong>every</strong> qualifying moment, whether or not you think a
+          candidate already covered it — overlaps are resolved afterwards by timestamp.
+        </p>
+        <p class="hint">
+          A short reaction: one mark at it. A <strong>long</strong> reaction: mark its start,
+          let it play, then <kbd>E</kbd> to extend that mark to the end — so a variant that
+          caught any part of it counts as covering it. Point marks already made are fine.
+        </p>
+        <p class="hint">A clip with nothing to mark is a real answer. Save it empty.</p>
+      </aside>
+    </section>
+  </main>
+
+  <script src="./review.js"></script>
+</body>
+</html>

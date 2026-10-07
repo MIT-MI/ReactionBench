@@ -1,0 +1,12 @@
+{
+  "supabaseUrl": "https://<your-project>.supabase.co",
+  "supabaseAnonKey": "<supabase-publishable-anon-key>",
+  "r2PublicBaseUrl": "https://<your-public-r2-bucket-domain>/",
+  "faceKeyTemplate": "face/{video_id}.mp4",
+  "ratersPerCandidate": 3,
+  "batchVideos": 12,
+  "minWindowContextS": 4,
+  "mode": "A",
+  "completionUrl": "https://app.prolific.com/submissions/complete?cc=<COMPLETION_CODE>",
+  "completionCode": ""
+}

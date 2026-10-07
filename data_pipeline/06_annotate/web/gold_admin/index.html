@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ReactionBench — Gold Annotation Admin</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <h1>Gold Annotation — Admin</h1>
+      <p id="subtitle">read-only monitoring</p>
+    </div>
+    <div class="controls">
+      <button type="button" id="btnRefresh" class="primary">Refresh</button>
+      <span id="updated" class="hint"></span>
+    </div>
+  </header>
+
+  <main>
+    <!-- overview -->
+    <section class="cards" id="cards"></section>
+
+    <!-- Stage A -->
+    <section class="block">
+      <h2>Stage A — scoring</h2>
+      <div class="two">
+        <div>
+          <h3>Raters per candidate</h3>
+          <div id="raterBars" class="bars"></div>
+          <p class="hint" id="raterNote"></p>
+        </div>
+        <div>
+          <h3>Human score distribution</h3>
+          <div id="scoreBars" class="bars"></div>
+          <h3>Rater agreement <span class="hint">(candidates with ≥2 raters)</span></h3>
+          <div id="agree" class="statlines"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- annotators -->
+    <section class="block">
+      <h2>Annotators <span class="hint">— low-effort flags in red</span></h2>
+      <div class="tablewrap">
+        <table id="annotators">
+          <thead><tr>
+            <th>annotator</th><th>scored</th><th>mean</th>
+            <th>0</th><th>1</th><th>2</th><th>3</th>
+            <th>|dev| vs peers</th><th>rankings</th><th>flags</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Stage B (optional ranking stage) -->
+    <section class="block">
+      <h2>Stage B — ranking</h2>
+      <div id="stageB" class="statlines"></div>
+    </section>
+
+    <!-- Stage C -->
+    <section class="block">
+      <h2>Stage C — rationale <span class="hint">(blind write, 200 clips)</span></h2>
+      <div class="two">
+        <div>
+          <div id="ratStats" class="statlines"></div>
+        </div>
+        <div>
+          <p class="hint">progress per annotator (of 200)</p>
+          <div id="ratAnnBars" class="bars"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- spot check -->
+    <section class="block">
+      <h2>Spot-check a clip</h2>
+      <form id="spotForm" class="controls">
+        <input id="spotId" type="text" placeholder="video id, e.g. 00077" />
+        <button type="submit" class="primary">Load</button>
+      </form>
+      <div class="two">
+        <video id="spotVideo" preload="auto" playsinline controls></video>
+        <div id="spotDetail" class="statlines"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>

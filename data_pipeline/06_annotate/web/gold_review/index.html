@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ReactionBench — rationale set video review</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="gate" class="gate">
+    <form id="gateForm" class="card">
+      <h1>Rationale set — video quality review</h1>
+      <p class="sub" id="subtitle">Go through all 200 clips: keep the clean ones, delete the bad,
+        and trim splice/compilation clips to the single sub-scene that caused the reaction.</p>
+      <input id="reviewerId" placeholder="Your name/id" value="reviewer" autocomplete="off" />
+      <button type="submit" class="primary">Start</button>
+    </form>
+  </div>
+
+  <main id="main" class="hidden">
+    <header>
+      <div><h1>Rationale video review</h1><p class="sub" id="subhdr"></p></div>
+      <div class="prog" id="prog"></div>
+    </header>
+    <div id="bar-wrap"><div id="bar"></div></div>
+
+    <p class="meta" id="meta"></p>
+    <div class="videos">
+      <div class="pane"><h3>Stimulus (with audio) <button id="btnReplay" type="button">▶ replay both</button></h3>
+        <video id="stimVideo" controls playsinline preload="metadata"></video></div>
+      <div class="pane"><h3>Reaction (muted, follows)</h3>
+        <video id="faceVideo" playsinline preload="metadata"></video></div>
+    </div>
+
+    <p class="draft" id="draft"></p>
+
+    <div class="verdict">
+      <button id="btnKeep" class="keep">✓ Keep <kbd>K</kbd></button>
+      <button id="btnDel" class="del">✗ Delete <kbd>D</kbd></button>
+      <span class="trim">trim to keep only
+        <input id="trimA" type="number" step="0.1" min="0" placeholder="start" /> –
+        <input id="trimB" type="number" step="0.1" min="0" placeholder="end" /> s (optional, for splice)</span>
+    </div>
+    <textarea id="note" rows="2" placeholder="note (why delete / what to trim / dedupe vs which candidate)"></textarea>
+    <div class="controls">
+      <button id="btnSave" class="primary" disabled>Save &amp; next <kbd>Enter</kbd></button>
+      <button id="btnPrev">◂ prev</button>
+      <span class="saved" id="saved"></span>
+    </div>
+  </main>
+
+  <div id="doneOverlay" class="overlay hidden">
+    <div class="card"><h1>Reviewed all clips 🎉</h1><p id="doneMsg"></p></div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
