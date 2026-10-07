@@ -1,0 +1,79 @@
+# ignore multimedia files
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.mp3
+*.wav
+
+
+# ignore model cache and checkpoints
+__pycache__/
+*.ckpt
+*.pt
+
+# ignore .vscode settings
+.vscode/
+
+# ignore results
+results/
+*/results/.venv/
+__pycache__/
+reactionbench/data/
+reactionbench/results/**/raw/
+.DS_Store
+!reactionbench/results/
+!reactionbench/results/**
+finetune/data/
+
+# checkpoint weights stay out of git, but the run config does not: train_args.json
+# records trainable_params / global_step / best_eval_loss / log_history and is the
+# provenance for REPORT.md's training numbers.
+finetune/ckpt/**
+!finetune/ckpt/*/
+!finetune/ckpt/*/train_args.json
+
+# the node run points these at scratch via symlink; a symlink is a file, so the
+# trailing-slash rules above do not cover it
+/reactionbench/data
+/finetune/data
+/.venv/
+
+# ---- release hygiene ----
+# secrets: real values live in .env (never committed); .env.example documents the names
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+application_default_credentials.json
+# private annotation metadata / ID maps must never enter the repo
+annotator_map*.json
+release_private/
+gold_scores_dump*.json
+# model weights and checkpoints
+*.safetensors
+*.bin
+*.gguf
+*.pth
+*.onnx
+ckpt/**/*.safetensors
+# media: clips, frames, audio, images downloaded or extracted for evaluation
+*.webm
+*.m4a
+*.flac
+*.aac
+/media/
+reactionbench/data*/
+# caches
+.cache/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+*.egg-info/
+wandb/
+hf_cache/
+*.log
+*.tmp
+reactionbench/results/controls/budget.json
